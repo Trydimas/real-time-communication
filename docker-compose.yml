@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    container_name: postgre_sql
+    ports:
+      - "5432:5432"
+    networks:
+      - project_network
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "db_password"
+      POSTGRES_DB: "db_simple_chat"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  dbeaver:
+    image: dbeaver/cloudbeaver
+    container_name: dbeaver
+    networks:
+      - project_network
+    ports:
+      - "9000:8978"
+    depends_on:
+      - db
+
+
+
+networks:
+  project_network:
+    driver: bridge
+
+
+    
