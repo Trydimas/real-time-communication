@@ -8,11 +8,12 @@ engine = create_engine(
     echo=True
 )
 
-factory_session = sessionmaker(bind=engine)
+SessionLocal = sessionmaker(bind=engine)
 
-def create_tables():
-    Base.metadata.create_all(bind=engine)
 
+def get_session():
+    with SessionLocal as session:
+        yield session
 
 
 class Base(DeclarativeBase):
