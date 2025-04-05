@@ -16,7 +16,7 @@ from config import settings
 config.set_main_option("sqlalchemy.url", settings.DB_URL)
 
 
-from models import users, messages  # noqa
+from models import user, message  # noqa
 from db import Base
 target_metadata = Base.metadata
 
