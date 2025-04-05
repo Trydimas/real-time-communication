@@ -5,17 +5,25 @@ from user import UserResp
 
 
 class MessageBase(BaseModel):
-    user_id: int
+    user_id: str
     text: str
 
 
 class MesageResp(MessageBase):
-    id: int
+    id: str
     is_checked: bool
     status: StatusEnum
     created_at: datetime
     updated_at: datetime
     user: UserResp
 
-class MessageCreate(MessageBase):
+
+class MessageSend(MessageBase):
     pass
+
+
+class MessageRefactor(MessageBase):
+    class Config:
+        fields = {
+            "user_id": {"exclude": True}
+        }

@@ -7,7 +7,7 @@ class BaseUser(BaseModel):
 
 
 class UserResp(BaseUser):
-    id: int
+    id: str
 
 
 class UserCreate(BaseUser):

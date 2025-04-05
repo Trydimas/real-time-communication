@@ -1,3 +1,5 @@
+import uuid
+
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, DateTime, Boolean, ForeignKey
 from sqlalchemy.sql import func
@@ -14,8 +16,8 @@ class StatusEnum(str, Enum):
 
 
 class Message(Base):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    id: Mapped[str] = mapped_column(primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id"))
     text: Mapped[str] = mapped_column(String, nullable=False)
     is_checked: Mapped[bool] = mapped_column(Boolean, default=False)
     status:Mapped[StatusEnum] = mapped_column(String, default=StatusEnum.NAN)
