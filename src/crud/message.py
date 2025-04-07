@@ -8,7 +8,7 @@ def get_all_messages(session: Session, *,
                      last_date: datetime | None = None,
                      limit: int = 100
                      ) -> list[MessageResp]:
-    # TODO не возвращается нужный last_key
+    """List of messages by ascending"""
 
     messages = session.query(Message)
     order_messages = messages.order_by(Message.created_at.asc())
@@ -21,10 +21,12 @@ def get_date_by_key(session: Session,
                     *,
                     last_key: str | None = None
                     ) -> datetime | None:
+    """Date will be using for comparison"""
+
     if not last_key:
         return None
     message = session.get(Message, last_key)
-    return message.updated_at
+    return message.created_at
 
 
 def checked_messages():

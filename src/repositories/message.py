@@ -11,10 +11,10 @@ def get_all_messages(session: Session,
                      limit: int = 100
                      ) -> MessagesResp:
     last_date = get_date_by_key(session, last_key=last_key)
-    messages: list[MessageResp] = message.get_all_messages(session, last_date=last_date, limit=limit)
-    logger.info(messages[-1])
+    messages = message.get_all_messages(session, last_date=last_date, limit=limit)
+    last_key = messages[-1].id if len(messages) else None
     res = MessagesResp(
-        last_key=messages[-1].id,
+        last_key=last_key,
         message_resp=messages
     )
     return res
