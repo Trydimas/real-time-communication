@@ -13,7 +13,7 @@ router = APIRouter(
 
 # TODO AI, that check message in moment send
 
-@router.get("/")
+@router.get("/all")
 def get_all_messages(
         session: Session = Depends(get_session),
         last_key: str | None = None,
