@@ -7,6 +7,8 @@ from db import Base
 from datetime import datetime, timezone
 from enum import Enum
 
+from models.user import User
+
 
 class StatusEnum(str, Enum):
     DANGEGOUSE = "Dangerouse"

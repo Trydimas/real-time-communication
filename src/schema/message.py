@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from models.message import StatusEnum
 from datetime import datetime
-from user import UserResp
+from schema.user import UserResp
 
 
 class MessageBase(BaseModel):
@@ -9,17 +9,20 @@ class MessageBase(BaseModel):
     text: str
 
 
-class MesageResp(MessageBase):
+class MessageResp(MessageBase):
     id: str
     is_checked: bool
     status: StatusEnum
     created_at: datetime
     updated_at: datetime
-    user: UserResp
+
+    class Config:
+        from_attributes = True
 
 
-class MessageSend(MessageBase):
-    pass
+class MessagesResp(BaseModel):
+    last_key: str | None
+    message_resp: list[MessageResp]
 
 
 class MessageRefactor(MessageBase):
@@ -27,3 +30,11 @@ class MessageRefactor(MessageBase):
         fields = {
             "user_id": {"exclude": True}
         }
+
+
+class MessageSend(MessageBase):
+    pass
+
+
+class MessgeUser(MessageResp):
+    user: UserResp
