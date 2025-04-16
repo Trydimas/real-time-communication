@@ -26,8 +26,8 @@ def get_all_messages(
 def get_messages_by_user(
         user_id: str,
         session: Session = Depends(get_session)
-) -> list[MessageResp]:
-    return message.get_messages_by_user(user_id)
+) -> MessagesResp:
+    return message.get_messages_by_user(session, user_id=user_id)
 
 
 @router.get("/{message_id}")

@@ -9,6 +9,8 @@ class BaseUser(BaseModel):
 class UserResp(BaseUser):
     id: str
 
+    class Config:
+        from_attributes = True
 
 class UserCreate(BaseUser):
     pass

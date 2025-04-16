@@ -1,7 +1,13 @@
-from schema.message import MessageResp
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from models.message import Message
 from datetime import datetime
+
+from schema.message import MessageResp
+from crud.user import get_user_by_id
+from models.user import User
+
+def check_messages():
+    pass
 
 
 def get_all_messages(session: Session, *,
@@ -26,8 +32,17 @@ def get_date_by_key(session: Session,
     if not last_key:
         return None
     message = session.get(Message, last_key)
-    return message.created_at
+    return message.created_at  # type: ignore
 
 
-def checked_messages():
-    pass
+def get_messages_by_user(session: Session,
+                         *,
+                         user_id: str,
+                         limit: int = 100
+                         ) -> MessageResp:
+    #user = get_user_by_id(session, user_id=user_id)
+    return
+
+
+
+

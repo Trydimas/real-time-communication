@@ -7,5 +7,6 @@ from sqlalchemy.orm import Session
 def get_user_by_id(session: Session,
                    *,
                    user_id: str
-                   ) -> UserResp:
-    pass
+                   ) -> type[User]:
+    user = session.get(User, user_id)
+    return user
